@@ -34,7 +34,29 @@
       this._el = element;
       this._images = images;
 
-      this._render();
+      this._renderAsHtml();
+
+      var width = 130; // ширина изображения
+      var count = 3; // количество изображений
+
+      var list = this._el.querySelector('ul');
+      var listElems = this._el.querySelectorAll('li');
+
+      var position = 0; // текущий сдвиг влево
+
+      this._el.querySelector('.prev').onclick = function() {
+        // сдвиг влево
+        // последнее передвижение влево может быть не на 3, а на 2 или 1 элемент
+        position = Math.min(position + width * count, 0)
+        list.style.marginLeft = position + 'px';
+      };
+
+      this._el.querySelector('.next').onclick = function() {
+        // сдвиг вправо
+        // последнее передвижение вправо может быть не на 3, а на 2 или 1 элемент
+        position = Math.max(position - width * count, -width * (listElems.length - count));
+        list.style.marginLeft = position + 'px';
+      };
     }
 
     _renderAsHtml() {
@@ -92,32 +114,6 @@
   new Carousel(document.getElementById('carousel-1'), images);
   new Carousel(document.getElementById('carousel-2'), images);
   new Carousel(document.getElementById('carousel-3'), images);
-
-  /* конфигурация */
-  var width = 130; // ширина изображения
-  var count = 3; // количество изображений
-
-  var carousel = document.getElementById('carousel');
-  var list = carousel.querySelector('ul');
-  var listElems = carousel.querySelectorAll('li');
-
-  var position = 0; // текущий сдвиг влево
-
-  carousel.querySelector('.prev').onclick = function() {
-    // сдвиг влево
-    // последнее передвижение влево может быть не на 3, а на 2 или 1 элемент
-    position = Math.min(position + width * count, 0)
-    list.style.marginLeft = position + 'px';
-  };
-
-  carousel.querySelector('.next').onclick = function() {
-    // сдвиг вправо
-    // последнее передвижение вправо может быть не на 3, а на 2 или 1 элемент
-    position = Math.max(position - width * count, -width * (listElems.length - count));
-    list.style.marginLeft = position + 'px';
-  };
-
-
 
 </script>
 </body>
