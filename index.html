@@ -13,25 +13,6 @@
 <div id="carousel-2" class="carousel"></div>
 <div id="carousel-3" class="carousel"></div>
 
-<div id="carousel" class="carousel">
-  <button class="arrow prev">⇦</button>
-  <div class="gallery">
-    <ul class="images">
-      <li><img src="https://js.cx/carousel/1.png"></li>
-      <li><img src="https://js.cx/carousel/2.png"></li>
-      <li><img src="https://js.cx/carousel/3.png"></li>
-      <li><img src="https://js.cx/carousel/4.png"></li>
-      <li><img src="https://js.cx/carousel/5.png"></li>
-      <li><img src="https://js.cx/carousel/6.png"></li>
-      <li><img src="https://js.cx/carousel/7.png"></li>
-      <li><img src="https://js.cx/carousel/8.png"></li>
-      <li><img src="https://js.cx/carousel/9.png"></li>
-      <li><img src="https://js.cx/carousel/10.png"></li>
-    </ul>
-  </div>
-  <button class="arrow next">⇨</button>
-</div>
-
 
 <script>
 
@@ -50,6 +31,31 @@
 
   class Carousel {
     constructor(element, images) {
+      this._el = element;
+      this._images = images;
+
+      this._render();
+    }
+
+    _renderAsHtml() {
+      var imagesHtml = '';
+
+      this._images.forEach(function(imageUrl) {
+        imagesHtml += `<li><img src="${imageUrl}"></li>`
+      });
+
+      this._el.innerHTML = `
+        <button class="arrow prev">⇦</button>
+        <div class="gallery">
+          <ul class="images">
+            ${imagesHtml}
+          </ul>
+        </div>
+        <button class="arrow next">⇨</button>
+      `
+    }
+
+    _render() {
       let gallery = document.createElement('div');
       let prevButton = document.createElement('button');
       let nextButton = document.createElement('button');
@@ -65,7 +71,7 @@
 
       imageList.className = 'images';
 
-      images.forEach(function(imageLink) {
+      this._images.forEach(function(imageLink) {
         let item = document.createElement('li');
         let image = new Image();
 
@@ -77,9 +83,9 @@
 
       gallery.appendChild(imageList);
 
-      element.appendChild(prevButton);
-      element.appendChild(gallery);
-      element.appendChild(nextButton);
+      this._el.appendChild(prevButton);
+      this._el.appendChild(gallery);
+      this._el.appendChild(nextButton);
     }
   }
 
