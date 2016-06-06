@@ -26,6 +26,8 @@ class Carousel {
 
     this._position = 0;
 
+    this._compiledTemplate = _.template(template);
+
 
     this._render();
 
@@ -46,7 +48,7 @@ class Carousel {
   }
 
   _render() {
-    this._el.innerHTML = _.template(template)({
+    this._el.innerHTML = this._compiledTemplate({
       images: this._images
     });
   }
