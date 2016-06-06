@@ -7,8 +7,6 @@
 
 <body>
 
-
-
 <div id="carousel-1" class="carousel"></div>
 <div id="carousel-2" class="carousel"></div>
 <div id="carousel-3" class="carousel"></div>
@@ -30,36 +28,36 @@
   ];
 
   class Carousel {
-    constructor(element, images) {
-      this._el = element;
-      this._images = images;
+    constructor(options) {
+      this._el = options.element;
 
-      this._renderAsHtml();
+      this._images = options.images;
 
-      var width = 130; // ширина изображения
-      var count = 3; // количество изображений
+      this._imageWidth = options.imageWidth || 130;
+      this._shiftCount = options.shiftCount || 3;
 
-      var list = this._el.querySelector('ul');
-      var listElems = this._el.querySelectorAll('li');
+      this._position = 0;
 
-      var position = 0; // текущий сдвиг влево
 
-      this._el.querySelector('.prev').onclick = function() {
-        // сдвиг влево
-        // последнее передвижение влево может быть не на 3, а на 2 или 1 элемент
-        position = Math.min(position + width * count, 0)
-        list.style.marginLeft = position + 'px';
-      };
+      this._render();
 
-      this._el.querySelector('.next').onclick = function() {
-        // сдвиг вправо
-        // последнее передвижение вправо может быть не на 3, а на 2 или 1 элемент
-        position = Math.max(position - width * count, -width * (listElems.length - count));
-        list.style.marginLeft = position + 'px';
-      };
+      this._list = this._el.querySelector('ul');
+
+      this._el.querySelector('.prev').onclick = this._onPrevClick.bind(this);
+      this._el.querySelector('.next').onclick = this._onNextClick.bind(this);
     }
 
-    _renderAsHtml() {
+    _onPrevClick(event) {
+      this._position = Math.min(this._position + this._imageWidth * this._shiftCount, 0)
+      this._list.style.marginLeft = this._position + 'px';
+    }
+
+    _onNextClick(event) {
+      this._position = Math.max(this._position - this._imageWidth * this._shiftCount, - this._imageWidth * (this._images.length - this._shiftCount));
+      this._list.style.marginLeft = this._position + 'px';
+    }
+
+    _render() {
       var imagesHtml = '';
 
       this._images.forEach(function(imageUrl) {
@@ -76,44 +74,25 @@
         <button class="arrow next">⇨</button>
       `
     }
-
-    _render() {
-      let gallery = document.createElement('div');
-      let prevButton = document.createElement('button');
-      let nextButton = document.createElement('button');
-      let imageList = document.createElement('ul');
-
-      gallery.className = 'gallery';
-
-      prevButton.className = 'arrow prev';
-      prevButton.textContent = '⇦';
-
-      nextButton.className = 'arrow next';
-      nextButton.textContent = '⇨';
-
-      imageList.className = 'images';
-
-      this._images.forEach(function(imageLink) {
-        let item = document.createElement('li');
-        let image = new Image();
-
-        image.src = imageLink;
-
-        item.appendChild(image);
-        imageList.appendChild(item);
-      });
-
-      gallery.appendChild(imageList);
-
-      this._el.appendChild(prevButton);
-      this._el.appendChild(gallery);
-      this._el.appendChild(nextButton);
-    }
   }
 
-  new Carousel(document.getElementById('carousel-1'), images);
-  new Carousel(document.getElementById('carousel-2'), images);
-  new Carousel(document.getElementById('carousel-3'), images);
+  new Carousel({
+    element: document.getElementById('carousel-1'),
+    images: images,
+    shiftCount: 1
+  });
+
+  new Carousel({
+    element: document.getElementById('carousel-2'),
+    images: images,
+    shiftCount: 2
+  });
+
+  new Carousel({
+    element: document.getElementById('carousel-3'),
+    images: images,
+    shiftCount: 3
+  });
 
 </script>
 </body>
