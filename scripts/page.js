@@ -178,9 +178,17 @@ class PageController {
 
     this._viewer.hide();
     this._catalogue.render( this._getPhones() );
+
+    this._catalogue._el.addEventListener('phoneSelected', this._onPhoneSelected.bind(this));
   }
 
   _getPhones() {
     return phones;
+  }
+
+  _onPhoneSelected(event) {
+    var phoneDetails = event.detail;
+
+    this._viewer.render(phoneDetails);
   }
 }

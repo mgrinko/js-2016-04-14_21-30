@@ -17,4 +17,8 @@ class Viewer {
   show() {
     this._el.classList.remove(CLASSES.hidden);
   }
+
+  render(details) {
+    alert(details);
+  }
 }
