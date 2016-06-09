@@ -156,7 +156,7 @@ let phones = [
   }
 ];
 
-class Page {
+class PageController {
   constructor(options) {
     this._el = options.element;
 
@@ -175,5 +175,12 @@ class Page {
     this._viewer = new Viewer({
       element: this._el.querySelector('[data-component="phoneViewer"]')
     });
+
+    this._viewer.hide();
+    this._catalogue.render( this._getPhones() );
+  }
+
+  _getPhones() {
+    return phones;
   }
 }

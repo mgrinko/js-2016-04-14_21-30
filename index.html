@@ -11,7 +11,7 @@
   <script src="./scripts/sorter.js"></script>
   <script src="./scripts/viewer.js"></script>
   <script src="./scripts/catalogue.js"></script>
-  <script src="./scripts/page.js"></script>
+  <script src="./scripts/page.js" defer></script>
   <script src="./scripts/app.js" defer></script>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.css">
@@ -28,11 +28,11 @@
 
           <!--Sidebar content-->
           <div class="col-md-2">
-            <div>
+            <div data-component="filter">
               Search: <input type="text">
             </div>
 
-            <div>
+            <div data-component="sorter">
               Sort by:
               <select>
                 <option value="name">Alphabetical</option>
@@ -44,20 +44,9 @@
           <!--Body content-->
           <div class="col-md-10">
 
-            <div></div>
+            <div data-component="phoneCatalogue"></div>
 
-            <div>
-              <button>Back</button>
-
-              <div class="phone-images">
-                <img class="phone active" src="img/phones/motorola-xoom-with-wi-fi.0.jpg">
-              </div>
-
-              <h1>Motorola XOOM\u2122 with Wi-Fi</h1>
-              <h2>motorola-xoom-with-wi-fi</h2>
-
-              <p>Motorola XOOM with Wi-Fi has a super-powerful dual-core processor and Android\u2122 3.0 (Honeycomb) \u2014 the Android platform designed specifically for tablets. With its 10.1-inch HD widescreen display, you\u2019ll enjoy HD video in a thin, light, powerful and upgradeable tablet.</p>
-            </div>
+            <div class="js-hidden" data-component="phoneViewer"></div>
 
           </div>
 
@@ -66,6 +55,37 @@
 
     </div>
   </div>
+
+  <script type="text/template" id="viewer-template">
+    <button>Back</button>
+
+    <div class="phone-images">
+      <img class="phone active" src="<%= phone.imageUrl %>">
+    </div>
+
+    <h1><%- phone.name %></h1>
+    <h2><%- phone.id %></h2>
+
+    <p><%= phone.snippet %></p>
+  </script>
+
+  <script type="text/template" id="catalogue-template">
+    <ul class="phones">
+
+      <% phones.forEach(function(phone) {%>
+
+        <li class="thumbnail phone-listing">
+          <a href="#/phones/<%= phone.id %>" class="thumb">
+            <img src="<%= phone.imageUrl %>" alt="<%- phone.name %>">
+          </a>
+          <a href="#/phones/<%= phone.id %>"><%- phone.name %></a>
+          <p><%- phone.snippet %></p>
+        </li>
+
+      <% }); %>
+
+    </ul>
+  </script>
 
 </body>
 

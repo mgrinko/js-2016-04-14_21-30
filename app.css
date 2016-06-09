@@ -4,6 +4,10 @@ body {
   padding-top: 20px;
 }
 
+.js-hidden {
+  display: none;
+}
+
 .phone-images {
   background-color: white;
   width: 450px;
