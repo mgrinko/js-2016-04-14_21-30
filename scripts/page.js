@@ -183,8 +183,12 @@ class PageController {
     this._filter._el.addEventListener('filterChange', this._onFilterChange.bind(this));
   }
 
-  _getPhones() {
-    return phones;
+  _getPhones(params = {}) {
+    let query = params.query && params.query.toLowerCase() || '';
+
+    return phones.filter(function(phone) {
+      return phone.name.toLowerCase().indexOf(query) !== -1;
+    });
   }
 
   _onPhoneSelected(event) {
@@ -196,6 +200,6 @@ class PageController {
   _onFilterChange(event) {
     var filterValue = event.detail;
 
-    this._catalogue.render( this._getPhones() );
+    this._catalogue.render( this._getPhones({ query: filterValue }) );
   }
 }
