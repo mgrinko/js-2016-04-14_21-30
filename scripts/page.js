@@ -180,6 +180,7 @@ class PageController {
     this._catalogue.render( this._getPhones() );
 
     this._catalogue._el.addEventListener('phoneSelected', this._onPhoneSelected.bind(this));
+    this._filter._el.addEventListener('filterChange', this._onFilterChange.bind(this));
   }
 
   _getPhones() {
@@ -190,5 +191,11 @@ class PageController {
     var phoneDetails = event.detail;
 
     this._viewer.render(phoneDetails);
+  }
+
+  _onFilterChange(event) {
+    var filterValue = event.detail;
+
+    this._catalogue.render( this._getPhones() );
   }
 }
