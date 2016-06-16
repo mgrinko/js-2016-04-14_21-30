@@ -1,11 +1,12 @@
 'use strict';
 
+var template = require('raw!./../templates/catalogue.html');
+
 class Catalogue {
   constructor(options) {
     this._el = options.element;
 
-    this._template = document.getElementById('catalogue-template').innerHTML;
-    this._compiledTemplate = _.template(this._template);
+    this._compiledTemplate = require('./../templates/catalogue.hbs');
     
     this._el.addEventListener('click', this._onPhoneClick.bind(this));
   }
