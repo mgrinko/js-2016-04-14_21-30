@@ -22,3 +22,5 @@ class Viewer {
     alert(details);
   }
 }
+
+module.exports = Viewer;

@@ -16,7 +16,9 @@
     "url": "https://github.com/mgrinko/js-2016-04-14_21-30/issues"
   },
   "homepage": "https://github.com/mgrinko/js-2016-04-14_21-30#readme",
-  "dependencies": {
-    "node-static": "^0.7.7"
+  "devDependencies": {
+    "json-loader": "^0.5.4",
+    "node-static": "^0.7.7",
+    "webpack": "^1.13.1"
   }
 }

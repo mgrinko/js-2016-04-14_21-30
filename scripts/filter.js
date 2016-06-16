@@ -20,3 +20,5 @@ class Filter {
     this._el.dispatchEvent(event);
   }
 }
+
+module.exports = Filter;

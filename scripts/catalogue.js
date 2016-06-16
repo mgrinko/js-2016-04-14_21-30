@@ -35,3 +35,5 @@ class Catalogue {
   }
 
 }
+
+module.exports = Catalogue;
