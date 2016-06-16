@@ -1,0 +1,34 @@
+{
+  "name": "js-2016-04-14_21-30",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mgrinko/js-2016-04-14_21-30.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mgrinko/js-2016-04-14_21-30/issues"
+  },
+  "homepage": "https://github.com/mgrinko/js-2016-04-14_21-30#readme",
+  "devDependencies": {
+    "babel-core": "^6.9.1",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-transform-runtime": "^6.9.0",
+    "babel-preset-es2015": "^6.9.0",
+    "css-loader": "^0.23.1",
+    "handlebars": "^4.0.5",
+    "handlebars-loader": "^1.3.0",
+    "json-loader": "^0.5.4",
+    "node-static": "^0.7.7",
+    "raw-loader": "^0.5.1",
+    "style-loader": "^0.13.1",
+    "uglify-js": "^2.6.2",
+    "webpack": "^1.13.1"
+  }
+}

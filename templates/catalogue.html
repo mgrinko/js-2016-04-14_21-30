@@ -1,0 +1,15 @@
+<ul class="phones">
+
+  <% phones.forEach(function(phone) {%>
+
+  <li class="thumbnail phone-listing" data-element="phone" data-phone-id="<%= phone.id %>">
+    <a href="#/phones/<%= phone.id %>" class="thumb" data-element="phoneLink">
+      <img src="<%= phone.imageUrl %>" alt="<%- phone.name %>">
+    </a>
+    <a href="#/phones/<%= phone.id %>" data-element="phoneLink"><%- phone.name %></a>
+    <p><%- phone.snippet %></p>
+  </li>
+
+  <% }); %>
+
+</ul>
